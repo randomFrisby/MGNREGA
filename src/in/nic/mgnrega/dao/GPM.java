@@ -1,4 +1,4 @@
-package com.masai.dao;
+package in.nic.mgnrega.dao;
 
 public interface GPM {
 

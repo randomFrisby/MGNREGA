@@ -1,4 +1,4 @@
-package com.masai.main;
+package in.nic.mgnrega.main;
 
 public class Main {
  
