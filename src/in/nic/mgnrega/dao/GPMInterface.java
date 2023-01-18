@@ -1,6 +1,6 @@
 package in.nic.mgnrega.dao;
 
-public interface GPM {
+public interface GPMInterface {
 
 	public void fun1();
 }
