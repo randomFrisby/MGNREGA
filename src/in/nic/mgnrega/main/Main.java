@@ -10,15 +10,16 @@ public class Main {
 		
 		Scanner sc = new Scanner(System.in);
 		A: while (true) {	
-			System.out.println("\n" + ConsoleColors.BLACK_ITALIC + ConsoleColors.CYAN_BACKGROUND + "-=-=-=- MGNREGA 2005 -=-=-=-"
+			System.out.println("\n" + ConsoleColors.BLACK_BOLD_BRIGHT + ConsoleColors.BLACK_ITALIC + ConsoleColors.CYAN_BACKGROUND + "-=-=-=- MGNREGA 2005 -=-=-=-"
 					+ ConsoleColors.RESET
 					+ ConsoleColors.WHITE_BOLD_BRIGHT
 					+ "\n1. Login as Block Development Officer(BDO)"
 					+ "\n2. Login as Gram Panchayat Member(GPM)"
+					+ "\n3. Info"
 					+ "\n0. Exit" +  ConsoleColors.RESET);
 			
-			System.out.print("\nChoose any option: ");
-			String choice = sc.next();	
+			System.out.print("\n" + ConsoleColors.WHITE_BOLD_BRIGHT +  "Choose any option: " +  ConsoleColors.RESET);
+			String choice = sc.nextLine().trim();
 				
 			switch (choice) {
 				case "1":
@@ -37,11 +38,20 @@ public class Main {
 					
 					
 					
+					
+					
+					
+					
 				case "2":
 					// GPM applications
 					break;
+					
+				case "3":
+					// Information about MGNREGA
+					Info.info();
+					break;
 				case "0": 
-					System.out.print("\nAre you sure you want to exit? (y/n): ");
+					System.out.print(ConsoleColors.WHITE_BOLD_BRIGHT +  "\nAre you sure you want to exit? (y/n): "+ ConsoleColors.RESET);
 					String option = sc.next();
 					if (option.equalsIgnoreCase("y")) {
 						break A;
@@ -49,12 +59,12 @@ public class Main {
 						break;
 					}
 				default:
-					System.out.println("\nChoose between 0-2");
+					System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT +  "\nChoose between 0-3" + ConsoleColors.RESET);
 					break;
 			}
 		}
 		
-		System.out.println("\nThank you!");
+		System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT +  "\nThank you!" + ConsoleColors.RESET);
 		
 		sc.close();
 	}

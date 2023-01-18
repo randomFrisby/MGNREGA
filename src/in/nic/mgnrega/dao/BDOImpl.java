@@ -2,7 +2,10 @@ package in.nic.mgnrega.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import in.nic.mgnrega.colors.ConsoleColors;
 import in.nic.mgnrega.exception.ProjectException;
@@ -25,15 +28,13 @@ public class BDOImpl implements BDOInterface {
 
 	
 	
-	
 	@Override
 	public String createProject(Project p) throws ProjectException{
 		String response = "\n" + ConsoleColors.RED_BACKGROUND + "Unable to create project";
 		
 		try(Connection conn = DBUtil.providConnection()) {
 			
-			PreparedStatement ps = conn.prepareStatement("insert into project (pname, budget, duration) "
-					+ "values (?, ?, ?)");
+			PreparedStatement ps = conn.prepareStatement("insert into project (pname, budget, duration) values (?, ?, ?)");
 			ps.setString(1, p.getPname());
 			ps.setInt(2, p.getBudget());
 			ps.setInt(3,  p.getDuration());
@@ -54,4 +55,47 @@ public class BDOImpl implements BDOInterface {
 		return response;
 	}
 
+
+
+
+	
+	
+	
+	@Override
+	public List<Project> viewAllProject() throws ProjectException {
+		List<Project> projects = new ArrayList<>();
+		
+		try(Connection conn = DBUtil.providConnection()) {
+		
+			PreparedStatement ps = conn.prepareStatement("select * from project");
+			
+			ResultSet rs = ps.executeQuery();
+			boolean flag = false;
+			
+			while (rs.next()) {
+				
+				flag = true;
+				Project p = new Project();
+				p.setPid(rs.getInt("pid"));
+				p.setPgpid(rs.getInt("pgpid"));
+				p.setPname(rs.getString("pname"));
+				p.setBudget(rs.getInt("budget"));
+				p.setDuration(rs.getInt("duration"));
+				
+				projects.add(p);
+				
+				
+			}
+			
+			if (flag == false) {
+				throw new ProjectException("No Project available");
+			}
+			
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		return projects;
+	}
 }

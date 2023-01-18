@@ -2,6 +2,7 @@ package in.nic.mgnrega.usecase;
 
 import java.util.Scanner;
 
+import in.nic.mgnrega.colors.ConsoleColors;
 import in.nic.mgnrega.dao.BDOImpl;
 import in.nic.mgnrega.dao.BDOInterface;
 
@@ -15,10 +16,10 @@ public class BDOLoginUseCase {
 		
 		BDOInterface bdoIntr = new BDOImpl();
 		
-		System.out.println("\nEnter your credentials");
-		System.out.print("Enter Username: ");
+		System.out.println("\n" + ConsoleColors.WHITE_BOLD_BRIGHT + "Enter your credentials" + ConsoleColors.RESET);
+		System.out.print(ConsoleColors.WHITE_BOLD_BRIGHT + "Enter Username: " + ConsoleColors.RESET);
 		String username = sc.next();
-		System.out.print("Enter password: ");
+		System.out.print(ConsoleColors.WHITE_BOLD_BRIGHT + "Enter password: " + ConsoleColors.RESET);
 		String password = sc.next();
 		
 		// sc.close();
