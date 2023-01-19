@@ -64,7 +64,7 @@ public class Main {
 			}
 		}
 		
-		System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT +  "\nThank you!" + ConsoleColors.RESET);
+		System.out.println("\n" + ConsoleColors.BLACK_BOLD_BRIGHT + ConsoleColors.BLACK_ITALIC + ConsoleColors.CYAN_BACKGROUND + "Thank you!" + ConsoleColors.RESET);
 		
 		sc.close();
 	}

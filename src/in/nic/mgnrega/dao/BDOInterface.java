@@ -2,7 +2,9 @@ package in.nic.mgnrega.dao;
 
 import java.util.List;
 
+import in.nic.mgnrega.exception.GPMException;
 import in.nic.mgnrega.exception.ProjectException;
+import in.nic.mgnrega.model.GPMember;
 import in.nic.mgnrega.model.Project;
 
 public interface BDOInterface {
@@ -16,4 +18,8 @@ public interface BDOInterface {
 	public String createProject(Project p) throws ProjectException;
 	
 	public List<Project> viewAllProject() throws ProjectException;
+	
+	public String createGPM(GPMember gpm) throws GPMException;
+	
+	public List<GPMember> viewAllGPM() throws GPMException;
 }
