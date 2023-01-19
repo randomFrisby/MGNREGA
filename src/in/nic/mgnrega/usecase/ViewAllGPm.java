@@ -24,14 +24,14 @@ public class ViewAllGPm {
 			
 			System.out.println("---------------------------------------------------------------------");
 			
-			System.out.printf("%7s %12s %16s %12.5s %19s", ConsoleColors.WHITE_BOLD_BRIGHT + "GPID", "NAME", "PANCHAYAT", "EMAIL", "PASSWORD" + ConsoleColors.RESET);
+			System.out.printf("%7s %8s %16s %12.5s %24s", ConsoleColors.WHITE_BOLD_BRIGHT + "GPID", "NAME", "PANCHAYAT", "EMAIL", "PASSWORD" + ConsoleColors.RESET);
 			System.out.println();
 			System.out.print("---------------------------------------------------------------------");
 			
 			System.out.println();
 			
 			for(GPMember g : members) {
-				System.out.format("%2s %15s %14s %15s %14s", g.getGpid(), g.getGname(), g.getGpanchayat(), g.getEmail(), g.getPassword());
+				System.out.format("%2s %11s %14s %20s %14s", g.getGpid(), g.getGname(), g.getGpanchayat(), g.getEmail(), g.getPassword());
 				System.out.println();
 			}
 			

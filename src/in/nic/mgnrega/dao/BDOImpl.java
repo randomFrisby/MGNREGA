@@ -174,5 +174,54 @@ public class BDOImpl implements BDOInterface {
 		return members;
 	}
 
+
+
+	
+	
+	
+	@Override
+	public String allocateProjectToGPM(int pid, int gpid)  throws ProjectException, GPMException {
+
+		String response = "Unable to allocate project";
+		
+		try(Connection conn = DBUtil.providConnection()) {
+			
+			PreparedStatement ps = conn.prepareStatement("select * from project where pid=?");
+			ps.setInt(1, pid);
+			
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				
+				PreparedStatement ps1 = conn.prepareStatement("select * from gpmember where gpid=?");
+				ps1.setInt(1, gpid);
+				
+				ResultSet rs1 = ps1.executeQuery();
+				if (rs1.next()) {
+					
+					PreparedStatement ps2 = conn.prepareStatement("update project set pgpid=? where pid=?");
+					ps2.setInt(1, gpid);
+					ps2.setInt(2, pid);
+					
+					int x = ps2.executeUpdate();
+					if (x > 0) {
+						response = "Project ID " + pid + " allocated to Gram Panchayat Member with ID " + gpid;
+					}
+					
+				} else {
+					throw new GPMException("Member with id " + gpid + " doesn't exist!");
+				}
+				
+			} else {
+				throw new ProjectException("Project with id " + pid + " doesn't exist!");
+			}
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		return response;
+	}
+
 	
 }

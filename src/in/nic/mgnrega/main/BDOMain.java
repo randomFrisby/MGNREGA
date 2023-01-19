@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import in.nic.mgnrega.colors.ConsoleColors;
 import in.nic.mgnrega.exception.ProjectException;
+import in.nic.mgnrega.usecase.AllocateProjectToGPMUseCase;
 import in.nic.mgnrega.usecase.BDOLoginUseCase;
 import in.nic.mgnrega.usecase.CreateGPMUseCase;
 import in.nic.mgnrega.usecase.CreateProjectUseCase;
@@ -68,6 +69,10 @@ public class BDOMain {
 			
 			case "4":
 				ViewAllGPm.viewAllGPM();
+				break;
+				
+			case "5":
+				AllocateProjectToGPMUseCase.allocateProjectToGPM();
 				break;
 				
 			case "0":
