@@ -4,8 +4,11 @@ import java.util.Scanner;
 
 import in.nic.mgnrega.colors.ConsoleColors;
 import in.nic.mgnrega.exception.ProjectException;
+import in.nic.mgnrega.usecase.AllocateProjectToGPMUseCase;
 import in.nic.mgnrega.usecase.BDOLoginUseCase;
+import in.nic.mgnrega.usecase.CreateGPMUseCase;
 import in.nic.mgnrega.usecase.CreateProjectUseCase;
+import in.nic.mgnrega.usecase.ViewAllGPm;
 import in.nic.mgnrega.usecase.ViewAllProjectUseCase;
 
 public class BDOMain {
@@ -59,6 +62,19 @@ public class BDOMain {
 			case "2":
 				ViewAllProjectUseCase.viewAllProject();
 				break;
+			
+			case "3":
+				CreateGPMUseCase.createGPM();
+				break;
+			
+			case "4":
+				ViewAllGPm.viewAllGPM();
+				break;
+				
+			case "5":
+				AllocateProjectToGPMUseCase.allocateProjectToGPM();
+				break;
+				
 			case "0":
 				System.out.println("\n" + ConsoleColors.BANANA_YELLOW_BACKGROUND + ConsoleColors.BLACK_BOLD + "LOGGED OUT!" + ConsoleColors.RESET);	
 				break A;
