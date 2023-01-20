@@ -1,5 +1,6 @@
 package in.nic.mgnrega.usecase;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import in.nic.mgnrega.colors.ConsoleColors;
@@ -16,16 +17,22 @@ public class BDOLoginUseCase {
 		
 		BDOInterface bdoIntr = new BDOImpl();
 		
-		System.out.println("\n" + ConsoleColors.WHITE_BOLD_BRIGHT + "Enter your credentials" + ConsoleColors.RESET);
-		System.out.print(ConsoleColors.WHITE_BOLD_BRIGHT + "Enter Username: " + ConsoleColors.RESET);
-		String username = sc.next();
-		System.out.print(ConsoleColors.WHITE_BOLD_BRIGHT + "Enter password: " + ConsoleColors.RESET);
-		String password = sc.next();
-		
-		// sc.close();
-		
-		
-		response = bdoIntr.loginBdo(username, password);
+		try {
+			
+			System.out.println("\n" + ConsoleColors.WHITE_BOLD_BRIGHT + "Enter your credentials" + ConsoleColors.RESET);
+			System.out.print(ConsoleColors.WHITE_BOLD_BRIGHT + "Enter Username: " + ConsoleColors.RESET);
+			String username = sc.nextLine();
+			System.out.print(ConsoleColors.WHITE_BOLD_BRIGHT + "Enter password: " + ConsoleColors.RESET);
+			String password = sc.nextLine();
+			
+			// sc.close();
+				
+			response = bdoIntr.loginBdo(username, password);
+			
+		} catch (InputMismatchException e) {
+			System.out.println(ConsoleColors.RED_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT 
+					+ "Exception : Invalid Input Data Type" + ConsoleColors.RESET);
+		}
 		
 		
 		return response;
