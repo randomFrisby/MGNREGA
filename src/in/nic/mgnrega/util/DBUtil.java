@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBUtil {
 	
-	public static Connection providConnection() {
+	public static Connection provideConnection() {
 		/*
 		 * method will be called whenever we require 
 		 * to establish connection to the database

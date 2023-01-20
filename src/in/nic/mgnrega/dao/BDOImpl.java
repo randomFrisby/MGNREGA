@@ -34,7 +34,7 @@ public class BDOImpl implements BDOInterface {
 	public String createProject(Project p) throws ProjectException{
 		String response = "\n" + ConsoleColors.RED_BACKGROUND + "Unable to create project";
 		
-		try(Connection conn = DBUtil.providConnection()) {
+		try(Connection conn = DBUtil.provideConnection()) {
 			
 			PreparedStatement ps = conn.prepareStatement("insert into project (pname, budget, duration) values (?, ?, ?)");
 			ps.setString(1, p.getPname());
@@ -63,7 +63,7 @@ public class BDOImpl implements BDOInterface {
 	public List<Project> viewAllProject() throws ProjectException {
 		List<Project> projects = new ArrayList<>();
 		
-		try(Connection conn = DBUtil.providConnection()) {
+		try(Connection conn = DBUtil.provideConnection()) {
 		
 			PreparedStatement ps = conn.prepareStatement("select * from project");
 			
@@ -106,7 +106,7 @@ public class BDOImpl implements BDOInterface {
 	public String createGPM(GPMember gpm) throws GPMException {
 		String response = "Unable to create a GPM";
 		
-		try(Connection conn = DBUtil.providConnection()) {
+		try(Connection conn = DBUtil.provideConnection()) {
 			
 			PreparedStatement ps = conn.prepareStatement("insert into gpmember (gname, gpanchayat, email, password) "
 					+ "values (?, ?, ?, ?)");
@@ -140,7 +140,7 @@ public class BDOImpl implements BDOInterface {
 
 		List<GPMember> members = new ArrayList<>();
 		
-		try(Connection conn = DBUtil.providConnection()) {
+		try(Connection conn = DBUtil.provideConnection()) {
 		
 			PreparedStatement ps = conn.prepareStatement("select * from gpmember");
 			
@@ -184,7 +184,7 @@ public class BDOImpl implements BDOInterface {
 
 		String response = "Unable to allocate project";
 		
-		try(Connection conn = DBUtil.providConnection()) {
+		try(Connection conn = DBUtil.provideConnection()) {
 			
 			PreparedStatement ps = conn.prepareStatement("select * from project where pid=?");
 			ps.setInt(1, pid);

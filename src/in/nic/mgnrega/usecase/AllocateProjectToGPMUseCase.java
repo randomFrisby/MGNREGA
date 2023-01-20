@@ -26,9 +26,9 @@ public class AllocateProjectToGPMUseCase {
 			
 			try {
 				String result = bdoIntr.allocateProjectToGPM(pid, gpid);
-				System.out.println(result);
+				System.out.println(ConsoleColors.GREEN + result + ConsoleColors.RESET);
 			} catch (ProjectException | GPMException e) {
-				System.out.println(e.getMessage());
+				System.out.println(ConsoleColors.RED_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + e.getMessage() + ConsoleColors.RESET);
 			}
 			
 		} catch (InputMismatchException e) {

@@ -1,6 +1,5 @@
 package in.nic.mgnrega.usecase;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
 import java.util.InputMismatchException;
@@ -16,8 +15,6 @@ public class CreateEmployeeUseCase {
 
 	public static void createEmployee() {
 		
-		SimpleDateFormat dateInput = new SimpleDateFormat("yyyy-MM-dd");
-		
 		Scanner sc = new Scanner(System.in);
 		
 		GPMInterface gpmIntr = new GPMImpl();
@@ -29,19 +26,22 @@ public class CreateEmployeeUseCase {
 			System.out.print("Enter Employee Address: ");
 			String address = sc.nextLine();
 			
-			System.out.print("Enter Employee Joined Date: ");
-			String joined_date = sc.nextLine();
-		    Date date = Date.valueOf(joined_date);
-		    
-		    System.out.print("Enter Employee's Wage/Day: ");
-		    int wage = sc.nextInt();
-			
 			Employee emp = new Employee();
 			emp.setEgpid(GPMImpl.loggedInGPMId);
 			emp.setEname(ename);
 			emp.setAddress(address);
+			
+			System.out.print("Enter Employee Joined Date: ");
+			String joined_date = sc.nextLine();
+			
+			Date date = Date.valueOf(joined_date);
 			emp.setDate_joined(date);
+			
+		    System.out.print("Enter Employee's Wage/Day: ");
+		    int wage = sc.nextInt();
+		    
 			emp.setWage(wage);
+		    
 			
 			try {
 				String response = gpmIntr.createEmployee(emp);
@@ -50,7 +50,7 @@ public class CreateEmployeeUseCase {
 				System.out.println(e.getMessage());
 			}
 			
-		} catch (InputMismatchException e) {
+		} catch (InputMismatchException | IllegalArgumentException e) {
 			System.out.println(ConsoleColors.RED_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT 
 					+ "\nException : Invalid Input Data Type" + ConsoleColors.RESET);
 		}
