@@ -29,35 +29,50 @@ public class Main {
 					while (chance-- != 0 && x == -1) {
 						x= BDOMain.login();
 						if (x == -1)
-							System.out.println("\n" + chance + " chances remaining");
+							System.out.println("\nONLY " + ConsoleColors.RED + chance + " CHANCES" + ConsoleColors.RESET + " REMAINING!");
 					}
 					break;
 					
 					
-					
-					
-					
-					
-					
+
 					
 					
 					
 				case "2":
 					// GPM applications
+					chance = 3;
+					x= -1;
+					while (chance-- != 0 && x == -1) {
+						x= GPMMain.login();
+						if (x == -1)
+							System.out.println("\nONLY " + ConsoleColors.RED + chance + " CHANCES" + ConsoleColors.RESET + " REMAINING!");
+					}
 					break;
+					
+					
+					
+					
 					
 				case "3":
 					// Information about MGNREGA
 					Info.info();
 					break;
+				
+
+					
+					
 				case "0": 
 					System.out.print(ConsoleColors.WHITE_BOLD_BRIGHT +  "\nAre you sure you want to exit? (y/n): "+ ConsoleColors.RESET);
-					String option = sc.next();
+					String option = sc.nextLine();
 					if (option.equalsIgnoreCase("y")) {
 						break A;
 					} else {
 						break;
 					}
+					
+				
+					
+					
 				default:
 					System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT +  "\nChoose between 0-3" + ConsoleColors.RESET);
 					break;

@@ -60,9 +60,9 @@ public class CreateGPMUseCase {
 	public static void createGPM() {
 		Scanner sc = new Scanner(System.in);
 		
+		BDOInterface bdoIntr = new BDOImpl();
+		
 		try {
-
-			BDOInterface bdoIntr = new BDOImpl();
 			
 			System.out.print(ConsoleColors.WHITE_BOLD_BRIGHT  + "Enter Member Name: " + ConsoleColors.RESET);
 			String gname = sc.nextLine();
@@ -130,7 +130,7 @@ public class CreateGPMUseCase {
 			String result;
 			try {
 				result = bdoIntr.createGPM(gpm);
-				System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT  + result + ConsoleColors.RESET);
+				System.out.println(result);
 			} catch (GPMException e) {
 				System.out.println(ConsoleColors.RED_BOLD_BRIGHT  + e.getMessage() + ConsoleColors.RESET);
 			}

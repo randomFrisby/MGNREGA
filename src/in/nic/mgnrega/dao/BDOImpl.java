@@ -118,7 +118,7 @@ public class BDOImpl implements BDOInterface {
 			int x= ps.executeUpdate();
 			
 			if (x > 0) {
-				response = "\n" + ConsoleColors.GREEN_BACKGROUND + "GPM created successfully" + ConsoleColors.RESET;
+				response = "\n" + ConsoleColors.GREEN + "GPM created successfully" + ConsoleColors.RESET;
 			} else {
 				throw new GPMException("Problem occured while creating GPM. Try again.");
 			}
