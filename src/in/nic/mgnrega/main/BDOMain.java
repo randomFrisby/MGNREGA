@@ -8,6 +8,7 @@ import in.nic.mgnrega.usecase.AllocateProjectToGPMUseCase;
 import in.nic.mgnrega.usecase.BDOLoginUseCase;
 import in.nic.mgnrega.usecase.CreateGPMUseCase;
 import in.nic.mgnrega.usecase.CreateProjectUseCase;
+import in.nic.mgnrega.usecase.EmployeeOnAProjectUseCase;
 import in.nic.mgnrega.usecase.ViewAllGPm;
 import in.nic.mgnrega.usecase.ViewAllProjectUseCase;
 
@@ -73,6 +74,10 @@ public class BDOMain {
 				
 			case "5":
 				AllocateProjectToGPMUseCase.allocateProjectToGPM();
+				break;
+				
+			case "6":
+				EmployeeOnAProjectUseCase.employeeOnAProject();
 				break;
 				
 			case "0":

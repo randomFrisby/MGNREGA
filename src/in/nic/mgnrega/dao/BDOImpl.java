@@ -1,6 +1,7 @@
 package in.nic.mgnrega.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,8 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import in.nic.mgnrega.colors.ConsoleColors;
+import in.nic.mgnrega.exception.EmployeeException;
 import in.nic.mgnrega.exception.GPMException;
 import in.nic.mgnrega.exception.ProjectException;
+import in.nic.mgnrega.model.Employee;
 import in.nic.mgnrega.model.GPMember;
 import in.nic.mgnrega.model.Project;
 import in.nic.mgnrega.util.DBUtil;
@@ -98,10 +101,7 @@ public class BDOImpl implements BDOInterface {
 	}
 
 
-
 	
-	
-		
 	@Override
 	public String createGPM(GPMember gpm) throws GPMException {
 		String response = "Unable to create a GPM";
@@ -132,9 +132,7 @@ public class BDOImpl implements BDOInterface {
 
 
 
-	
-	
-	
+
 	@Override
 	public List<GPMember> viewAllGPM() throws GPMException {
 
@@ -176,9 +174,6 @@ public class BDOImpl implements BDOInterface {
 
 
 
-	
-	
-	
 	@Override
 	public String allocateProjectToGPM(int pid, int gpid)  throws ProjectException, GPMException {
 
@@ -223,5 +218,55 @@ public class BDOImpl implements BDOInterface {
 		return response;
 	}
 
+	
+	public List<Employee> employeeOnAProject(int pid) throws ProjectException, EmployeeException {
+		
+		List<Employee> empList = new ArrayList<>();
+		
+		
+		try (Connection conn = DBUtil.provideConnection()){
+			
+			PreparedStatement ps = conn.prepareStatement("select * from project where pid =?");
+			ps.setInt(1, pid);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				PreparedStatement ps2 = conn.prepareStatement("select * from employee e INNER JOIN project p "
+						+ "on e.epid = p.pid WHERE p.pid = ?");
+				ps2.setInt(1, pid);
+				
+				ResultSet rs2 = ps2.executeQuery();
+				
+				while(rs2.next()) {
+
+					int eid = rs2.getInt("eid");
+					int egpid = rs2.getInt("egpid");
+					int epid = rs2.getInt("epid");
+					String name = rs2.getString("ename");
+					String address = rs2.getString("address");
+					Date date = rs2.getDate("date_joined");
+					int wage = rs2.getInt("wage");
+					
+					
+					Employee emp = new Employee(eid, egpid, epid, name, address, date, wage);
+					empList.add(emp);
+		
+				}
+				
+			} else {
+				throw new ProjectException("No Project found with PID ID : " + pid);
+			}
+		
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());;
+		}
+		
+		if(empList.size() == 0) {
+			throw new EmployeeException("Exception : No Employee Found in the given PID : " + pid);
+		}
+			
+		return empList;
+	}
 	
 }

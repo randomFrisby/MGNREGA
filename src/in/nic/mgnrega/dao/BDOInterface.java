@@ -2,8 +2,10 @@ package in.nic.mgnrega.dao;
 
 import java.util.List;
 
+import in.nic.mgnrega.exception.EmployeeException;
 import in.nic.mgnrega.exception.GPMException;
 import in.nic.mgnrega.exception.ProjectException;
+import in.nic.mgnrega.model.Employee;
 import in.nic.mgnrega.model.GPMember;
 import in.nic.mgnrega.model.Project;
 
@@ -30,4 +32,7 @@ public interface BDOInterface {
 	
 	// 6. Allocate Project to GPM
 	public String allocateProjectToGPM(int pid, int gpid) throws ProjectException, GPMException;
+	
+	// 7. List Of Employee working on that Project and their wage
+	public List<Employee> employeeOnAProject(int pid) throws ProjectException, EmployeeException;
 }

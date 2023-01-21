@@ -1,6 +1,7 @@
 package in.nic.mgnrega.dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import in.nic.mgnrega.exception.EmployeeException;
 import in.nic.mgnrega.exception.GPMException;
 import in.nic.mgnrega.exception.ProjectException;
 import in.nic.mgnrega.model.Employee;
+import in.nic.mgnrega.model.EmployeeWageOperationDTO;
 import in.nic.mgnrega.model.Project;
 import in.nic.mgnrega.util.DBUtil;
 
@@ -77,9 +79,6 @@ public class GPMImpl implements GPMInterface {
 
 
 
-
-	
-	
 	
 	@Override
 	public List<Employee> viewAllEmployee() throws EmployeeException {
@@ -162,9 +161,6 @@ public class GPMImpl implements GPMInterface {
 
 
 
-
-	
-	
 	
 	@Override
 	public String assingnEmployeeToProject(int eid, int pid) throws EmployeeException, GPMException, ProjectException {
@@ -215,6 +211,51 @@ public class GPMImpl implements GPMInterface {
 		return response;
 	}
 
+	
+	public List<EmployeeWageOperationDTO> employeeDaysAndWage() throws EmployeeException {
+		
+		List<EmployeeWageOperationDTO> dayandWageList = new ArrayList<>();
+		
+		
+		try (Connection conn = DBUtil.provideConnection()) {
+			
+			PreparedStatement ps = conn.prepareStatement("select e.eid, e.ename, p.pid, p.pname, e.date_joined, datediff(curdate(), date_joined) "
+					+ "as days_worked, e.wage, datediff(curdate(), date_joined) * e.wage as total_amount "
+					+ "from employee e INNER JOIN project p "
+					+ "ON e.epid = p.pid "
+					+ "group by e.eid");
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				int eid = rs.getInt("eid");
+				String ename = rs.getString("ename");
+				int pid = rs.getInt("pid");
+				String pname = rs.getString("pname");
+				Date date = rs.getDate("date_joined");
+				int days = rs.getInt("days_worked");
+				int wage = rs.getInt("wage");
+				int total = rs.getInt("total_amount");
+				
+				EmployeeWageOperationDTO empWageTotal = new EmployeeWageOperationDTO(eid, ename, pid, pname, date, days, wage, total);
+				dayandWageList.add(empWageTotal);	
+				
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			throw new EmployeeException(e.getMessage());
+		}
+		
+		
+		if(dayandWageList.size() == 0) {
+			throw new EmployeeException("Exception : No employee Found in DataBase");
+		}
+			
+		return dayandWageList;
+		
+	}
 	
 	
 }

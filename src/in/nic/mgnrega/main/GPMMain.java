@@ -6,6 +6,7 @@ import in.nic.mgnrega.colors.ConsoleColors;
 import in.nic.mgnrega.dao.GPMImpl;
 import in.nic.mgnrega.usecase.AssignEmployeeToProjectUseCase;
 import in.nic.mgnrega.usecase.CreateEmployeeUseCase;
+import in.nic.mgnrega.usecase.EmployeeDaysAndWageUseCase;
 import in.nic.mgnrega.usecase.GPMLoginUseCase;
 import in.nic.mgnrega.usecase.ViewAllEmployeeUseCase;
 import in.nic.mgnrega.usecase.ViewAllProjectUnderGPMUseCase;
@@ -71,6 +72,7 @@ public class GPMMain {
 				break;
 			
 			case "5":
+				EmployeeDaysAndWageUseCase.employeedaysAndWage();
 				break;
 				
 			case "0":

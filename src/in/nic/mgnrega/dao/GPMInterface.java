@@ -6,6 +6,7 @@ import in.nic.mgnrega.exception.EmployeeException;
 import in.nic.mgnrega.exception.GPMException;
 import in.nic.mgnrega.exception.ProjectException;
 import in.nic.mgnrega.model.Employee;
+import in.nic.mgnrega.model.EmployeeWageOperationDTO;
 import in.nic.mgnrega.model.Project;
 
 public interface GPMInterface {
@@ -24,4 +25,7 @@ public interface GPMInterface {
 	
 	// 5. Assign Employee To A Project
 	public String assingnEmployeeToProject(int eid, int pid) throws EmployeeException, GPMException, ProjectException;
+	
+	// 6. View total number of days Employee worked in a project and also their wages
+	public List<EmployeeWageOperationDTO> employeeDaysAndWage() throws EmployeeException;
 }
