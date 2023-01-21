@@ -1,0 +1,78 @@
+ create table gpmember(
+gpid int primary Key auto_increment,
+gname varchar(20) not null,
+gpanchayat varchar(20) not null unique,
+email varchar(20) not null unique,
+password varchar(20) not null
+);
+
+
+
+create table project(
+pid int primary Key auto_increment,
+pgpid int,
+pname varchar(20) not null,
+budget int not null,
+duration int not null,
+foreign key (pgpid) references gramPanchayat(gpid)
+);
+
+
+
+create table employee(
+eid int Primary Key auto_increment,
+egpid int,
+epid int,
+ename varchar(20) not null,
+address varchar(20) not null,
+date_joined date not null,
+wage int not null,
+foreign key (epid) references project(pid) on delete cascade on update set null,
+foreign key (egpid) references gpmember(gpid)
+);
+
+
+
+> desc gpmember;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| gpid      | int         | NO   | PRI | NULL    | auto_increment |
+| gName     | varchar(20) | NO   |     | NULL    |                |
+| gpanchayat| varchar(20) | NO   | UNI | NULL    |                |
+| email     | varchar(20) | NO   | UNI | NULL    |                |
+| password  | varchar(20) | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+
+
+> desc project;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| pid       | int         | NO   | PRI | NULL    | auto_increment |
+| pgpid     | int         | YES  | MUL | NULL    |                |
+| pName     | varchar(20) | NO   |     | NULL    |                |
+| budget    | int         | NO   |     | NULL    |                |
+| duration  | int         | NO   |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+
+
+> desc employee;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| eid          | int         | NO   | PRI | NULL    | auto_increment |
+| egpid        | int         | YES  | MUL | NULL    |                |
+| epid         | int         | YES  | MUL | NULL    |                |
+| ename        | varchar(20) | NO   |     | NULL    |                |
+| address      | varchar(20) | NO   |     | NULL    |                |
+| date_joined  | date        | NO   |     | NULL    |                |
+| wage         | int         | NO   |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+
+
+
+
+
+
+select e.eid, e.ename, p.pid, p.pname, datediff(current_date(), e.date_joined) as days_worked, datediff(current_date(), e.date_joined) * e.wage from employee e INNER JOIN project p on e.epid = p.pid group by e.eid;
