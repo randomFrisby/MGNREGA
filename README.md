@@ -1,4 +1,4 @@
-# curved-feeling-5937
+# MGNREGA - Mahatma Gandhi National Rural Employment Guarantee Act 2005
 
 <p align="center">
   <img width="300" height="450" src="https://user-images.githubusercontent.com/106339098/214390014-147c03ae-dfec-4ae5-bcc0-c939901e4faa.png">
